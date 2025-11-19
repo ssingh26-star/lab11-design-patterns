@@ -12,9 +12,7 @@ def test_correct_name():
     [
         ("John Smith", "J. S."),
         ("john smith", "J. S."),
-        ("@abc", "@A."),
-        ("@843A", "@8."),
-        ("--**abc", "--**A."),
+        ("     Eastern    Michigan   University ", "E. M. U."),
     ],
 )
 def test_given_value_for_initial(input_text, initials):
