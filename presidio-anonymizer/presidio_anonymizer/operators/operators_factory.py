@@ -16,13 +16,12 @@ from presidio_anonymizer.operators import (
     OperatorType,
     Redact,
     Replace,
-    Initial
 )
 
 logger = logging.getLogger("presidio-anonymizer")
 
 # Predefined operators
-ANONYMIZERS = [Custom, Encrypt, Hash, Keep, Mask, Redact, Replace, Initial]
+ANONYMIZERS = [Custom, Encrypt, Hash, Keep, Mask, Redact, Replace]
 if AHDS_AVAILABLE and AHDSSurrogate:
     ANONYMIZERS.append(AHDSSurrogate)
 
@@ -124,6 +123,7 @@ class OperatorsFactory:
         :type operator_name: operator name.
         :return: operator class entity.
         """
+
 
         operators_by_type = self.__get_operators_classes().get(operator_type)
         if not operators_by_type:
