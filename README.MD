@@ -9,21 +9,27 @@
 
 * A written description of the call stack leading to line 133 in operators_factory.py
 ```
-From the <module> sample.py (line 35), 
-to the main method in sample.py (line 29), 
-to the run_anonymizer method in the sample.py (line 13)
-to the anonymize method in AnonymizerEngine Class (line 104)
-[complete the call stack here]
+When debugging `sample.py` with the `"initial"` operator and stopping at the factory line, the call stack (see `call-stack.png`) shows this sequence:
+
+1. `<module>` in `sample.py` (line 35) — program begins.
+2. `main()` in `sample.py` (line 28) — calls `run_anonymizer("initial")`.
+3. `run_anonymizer()` in `sample.py` (line 13) — constructs `AnonymizerEngine` and calls `engine.anonymize(...)`.
+4. `anonymize()` in `anonymizer_engine.py` (line 104) — prepares anonymization flow.
+5. `_operate()` in `engine_base.py` (line 54) — begins operating over detected spans.
+6. `__operate_on_text()` in `engine_base.py` (line 86) — iterates over PII and selects an operator.
+7. `create_operator_class()` in `operators_factory.py` — finally executes:
+   ```python
+   operator = operators_by_type.get(operator_name)
 ```
 
 * How many if/elif branches are used in selecting the operator?
-*Put your answer here*
+Zero, because the factory does not use conditional logic to pick operators.
 
 * What data structure (a Python data type) exactly is used to select the operator?
-*Put your answer here*
+A dictionary (dict).
 
 * Explain how "Strategy" design pattern is reflected here.
-
+Strategy pattern shown through interchangeable Operator classes with common interface. Factory uses dictionary lookup instead of conditionals. Each operator encapsulates different algorithm while maintaining consistent interface. By using a dictionary lookup instead of conditional statements, the factory enables runtime strategy selection where the anonymization behavior can be swapped simply by changing the operator name, encapsulating each algorithm independently while maintaining a consistent interface.
 
 ---
 
