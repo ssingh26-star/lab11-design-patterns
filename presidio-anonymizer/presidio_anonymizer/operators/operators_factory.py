@@ -124,6 +124,7 @@ class OperatorsFactory:
         :return: operator class entity.
         """
 
+
         operators_by_type = self.__get_operators_classes().get(operator_type)
         if not operators_by_type:
             logger.error(f"No such operator type {operator_type}")
