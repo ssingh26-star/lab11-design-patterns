@@ -13,11 +13,14 @@ def test_correct_name():
         ("John Smith", "J. S."),
         ("john smith", "J. S."),
         ("     Eastern    Michigan   University ", "E. M. U."),
+        ("@abc", "@A."),  
+        ("@843A", "@8."),
+        ("--**abc", "--**A."),
     ],
 )
 def test_given_value_for_initial(input_text, initials):
-    result = Initial().operate(input_text)
-    assert result == initials
+    anonymized_text = Initial().operate(input_text)
+    assert anonymized_text == initials
 
 def test_initials_remove_extra_whitespace():
     input_text = "     Eastern    Michigan   University "
